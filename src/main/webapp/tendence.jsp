@@ -29,7 +29,7 @@
     <!-- ––––––––––––––––––––––––––––––––––––––––– -->
     <!-- PAGE TITLE                                -->
     <!-- ––––––––––––––––––––––––––––––––––––––––– -->
-    <title>郑航食堂 | 首页，推荐，目录，优质评价</title>
+    <title>FRIDAY | Coupons, Deals, Discounts and Promo codes Template</title>
 
     <!-- ––––––––––––––––––––––––––––––––––––––––– -->
     <!-- SEO METAS                                 -->
@@ -55,38 +55,25 @@
     <!-- ––––––––––––––––––––––––––––––––––––––––– -->
 
     <!-- Bootstrap -->
-    <link href="<%=basePath%>assets/css/bootstrap.min.css" rel="stylesheet">
-    <!-- ––––––––––––––––––––––––––––––––––––––––– -->
-    <!-- Initialize jQuery library                 -->
-    <!-- ––––––––––––––––––––––––––––––––––––––––– -->
-    <script src="<%=basePath%>assets/js/jquery-1.12.3.min.js"></script>
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Font Awesome -->
-    <link href="<%=basePath%>assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Linearicons -->
-    <link href="<%=basePath%>assets/vendors/linearicons/css/linearicons.css" rel="stylesheet">
+    <link href="assets/vendors/linearicons/css/linearicons.css" rel="stylesheet">
 
     <!-- Owl Carousel -->
-    <link href="<%=basePath%>assets/vendors/owl-carousel/owl.carousel.min.css" rel="stylesheet">
-    <link href="<%=basePath%>assets/vendors/owl-carousel/owl.theme.min.css" rel="stylesheet">
+    <link href="assets/vendors/owl-carousel/owl.carousel.min.css" rel="stylesheet">
+    <link href="assets/vendors/owl-carousel/owl.theme.min.css" rel="stylesheet">
 
     <!-- Flex Slider -->
-    <link href="<%=basePath%>assets/vendors/flexslider/flexslider.css" rel="stylesheet">
+    <link href="assets/vendors/flexslider/flexslider.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="<%=basePath%>assets/css/base.css" rel="stylesheet">
-    <link href="<%=basePath%>assets/css/style.css" rel="stylesheet">
-    <link href="<%=basePath%>layui/css/layui.css" rel="stylesheet">
-    <script src="<%=basePath%>layui/layui.js"></script>
-    <style>
-        .menuRedHeart{
-            color: Red;
-        }
-        .menuWhiteHeart{
-            color: white;
-        }
-    </style>
+    <link href="assets/css/base.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+
 </head>
 
 <body id="body" class="wide-layout preloader-active">
@@ -131,89 +118,47 @@
             <div class="page-container ptb-60">
                 <div class="container">
                     <section class="sign-area panel p-40">
-                        <h3 class="sign-title">注册<small>或 <a href="signin.jsp" class="color-green">登入</a></small></h3>
+                        <h3 class="sign-title">点评状态/建议</h3>
                         <div class="row row-rl-0">
                             <div class="col-sm-6 col-md-7 col-left">
-                                <form class="p-40" action="<%=basePath%>register/toRegister.action" method="post">
-                                    <div class="form-group">
-                                        <label class="sr-only">名字</label>
-                                        <input type="text" name="name" class="form-control input-lg" placeholder="全名" required="required">
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-success" style="width: 35%">
+                                        <span class="sr-only">35% Complete (success)</span>
+                                        好评 35%
                                     </div>
-                                    <div class="form-group">
-                                        <label class="sr-only">学号</label>
-                                        <input type="text" name="xhid" class="form-control input-lg" onkeyup="checkXH($(this).val())" placeholder="学号" required="required">
+                                    <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: 20%">
+                                        <span class="sr-only">20% Complete (warning)</span>
+                                        20
                                     </div>
-                                    <script>
-                                        function checkXH(xh){
-                                            $.ajax({
-                                                url:"<%=basePath%>register/checkXHID.action?xhid="+xh
-                                                    , async: true
-                                                    , success:function (isSuccess) {
-                                                    if (isSuccess) {
-                                                        layui.use('layer', function () {
-                                                            var layer = layui.layer;
-                                                            layer.closeAll();
-                                                            layer.msg('该学号已注册！', {icon: 5});
-                                                            return;
-                                                        })
-                                                    }else if (xh.length == 9){
-                                                        layui.use('layer', function () {
-                                                            var layer = layui.layer;
-                                                            layer.closeAll();
-                                                            layer.msg('该学号可用！', {icon: 6});
-                                                        })
-                                                    }
-                                                }
-                                            })
-                                        }
-
-                                    </script>
-                                    <script>
-
-                                        function doubleCheckPassword(p1,p2) {
-                                            if(p1 != p2 && p2.length >= p1.length){
-                                                layui.use('layer', function () {
-                                                        var layer = layui.layer;
-                                                        layer.closeAll();
-                                                        layer.msg('两次密码不一致！', {icon: 5});
-                                                        return;
-                                                    }
-                                                )
-                                            }
-                                            else if( p1 == p2){
-                                                layui.use('layer', function () {
-                                                        var layer = layui.layer;
-                                                        layer.closeAll();
-                                                        layer.msg('两次密码一致！', {icon: 6});
-                                                        return;
-                                                    }
-                                                )
-                                            }
-                                        }
-                                    </script>
-                                    <div class="form-group">
-                                        <label class="sr-only">密码</label>
-                                        <input type="password" name="password" class="form-control input-lg" id="password1" placeholder="密码"  required="required">
+                                    <div class="progress-bar progress-bar-danger" style="width: 10%">
+                                        <span class="sr-only">10% Complete (danger)</span>
+                                        10
                                     </div>
-                                    <div class="form-group">
-                                        <label class="sr-only">确认密码</label>
-                                        <input type="password"  required="required" class="form-control input-lg" onkeyup="doubleCheckPassword($('#password1').val(),$(this).val())"  placeholder="确认密码">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="radio-inline">
-                                            <input type="radio" name="gender" id="inlineRadio1" value="男"> 男
-                                        </label>
-                                        <label class="radio-inline">
-                                            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="女"> 女
-                                        </label>
-                                    </div>
-                                    <button type="submit" class="btn btn-block btn-lg">注册</button>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </section>
                 </div>
             </div>
+            <%--<script>
+                //***********************************上传验证**********************************
+                function checkFile(field, rules, i, options) {
+                    //上传文件验证
+                    var urlStr = field.val();
+                    if (null == urlStr || urlStr == "") {
+                        return;
+                    }
+                    if (urlStr != "") {
+                        var urlType = urlStr.substring(urlStr.lastIndexOf(".") + 1, urlStr.length);
+                        urlType = urlType.toLowerCase();
+                        if (urlType == "jpg" || urlType == "png" || urlType == "jpeg" || urlType == "gif" || urlType == "bmp") {
+                        }
+                        else {
+                            return options.allrules.validatePhoto.alertText;
+                        }
+                    }
+                }
+            </script>--%>
 
 
         </main>

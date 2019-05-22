@@ -31,13 +31,6 @@ public class RegisterControl {
 
     @RequestMapping("/toRegister.action")
     public void toRegister(User user, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        if(!loginAndRegisterService.isXHIdAlreadyExist(user.getXhid())){
-            loginAndRegisterService.register(user);
-            request.getRequestDispatcher("/login_user.jsp").forward(request,response);
-        }else {
-            request.getRequestDispatcher("/login_user.jsp").forward(request,response);
-        }
-
+        loginAndRegisterService.register(user);
     }
 }

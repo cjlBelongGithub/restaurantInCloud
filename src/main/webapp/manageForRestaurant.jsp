@@ -276,9 +276,23 @@
                     </div>
                     <div style="">
                         <button style="margin-bottom: 20px;font-size: 16px" onclick="addMenu()" type="button" class="col-xs-12 btn btn-default">添加菜谱</button>
-                        <button style="font-size: 16px"  type="button" class="col-xs-12 btn btn-default">添加菜谱</button>
+                        <button style="font-size: 16px" onclick="tendence()"  type="button" class="col-xs-12 btn btn-default">添加菜谱</button>
                     </div>
                     <script>
+                        function tendence() {
+                            layui.use('layer', function(){
+                                var layer = layui.layer;
+                                layer.open({
+                                    type: 2,
+                                    title: '添加菜谱',
+                                    shadeClose: true,
+                                    shade: false,
+                                    maxmin: false, //开启最大化最小化按钮
+                                    area: ['480px', '500px'],
+                                    content: '<%=basePath%>tendence.jsp'
+                                });
+                            });
+                        }
                         function addMenu() {
                             layui.use('layer', function(){
                                 var layer = layui.layer;

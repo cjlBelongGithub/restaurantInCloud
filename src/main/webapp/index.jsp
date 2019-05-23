@@ -193,7 +193,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                                         $(".menu"+menuId).removeClass('menuWhiteHeart');
                                                                         $(".menu"+menuId).addClass('menuRedHeart');
                                                                         layer.msg('收藏菜品成功')
-                                                                    })
+                                                                    });
                                                                 else{
                                                                     layui.use('layer', function() {
                                                                         var layer = layui.layer;
@@ -216,8 +216,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <div class="deal-about p-20 pos-a bottom-0 left-0">
                                                 <div class="rating mb-10">
                                                     <span class="rating-stars" data-rating="5">
-                                                        <span style="color: #dddddd">综合评分：</span>
-                                                        <strong>
+                                                        <strong style="font-size: 18px; -webkit-text-stroke: 1px black;">
+                                                            <span style="color: #dddddd">综合评分：</span>
                                                             <c:if test="${menu.score eq 0 }">
                                                                 暂无评
                                                             </c:if>
@@ -231,7 +231,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                     </span>
                                                 </div>
                                                 <h3 class="deal-title mb-10 ">
-			                    <a href="#" onclick="makeAComment(${menu.menuid})" class="color-light color-h-lighter">${menu.name}</a>
+                                                    <a href="#" onclick="makeAComment(${menu.menuid})"
+                                                       class="color-light color-h-lighter">
+                                                        <strong style="font-size: 18px; -webkit-text-stroke: 1px green;">${menu.name}</strong></a>
 			                </h3>
                                             </div>
                                         </figure>
@@ -281,7 +283,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                                             $(".menu"+menuId).removeClass('menuWhiteHeart');
                                                                             $(".menu"+menuId).addClass('menuRedHeart');
                                                                             layer.msg('收藏菜品成功')
-                                                                        })
+                                                                        });
                                                                     else{
                                                                         layui.use('layer', function() {
                                                                             var layer = layui.layer;

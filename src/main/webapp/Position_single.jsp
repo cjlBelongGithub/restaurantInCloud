@@ -156,7 +156,7 @@
                                                         <div class="col-sm-12 col-lg-3">
                                                             <div class="deal-single panel">
                                                                 <figure class="deal-thumbnail embed-responsive embed-responsive-16by9" data-bg-img="<%=basePath%>${restaurant.logo}">
-                                                                    </ul>--%>
+                                                                    </ul>
                                                                     <div class="deal-store-logo">
                                                                         <img src="<%=basePath%>${restaurant.logo}" alt="">
                                                                     </div>

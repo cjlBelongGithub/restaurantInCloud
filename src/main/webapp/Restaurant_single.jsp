@@ -1,4 +1,5 @@
-﻿<%@ page import="javax.swing.plaf.basic.BasicEditorPaneUI" %>
+﻿﻿
+<%@ page import="javax.swing.plaf.basic.BasicEditorPaneUI" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -88,8 +89,8 @@
 
 <body id="body" class="wide-layout preloader-active" onload="load()">
 
-     
-    <script>
+
+<script>
         function load(){
             layui.use('layer', function(){
                 var layer = layui.layer;

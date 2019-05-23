@@ -128,28 +128,88 @@
     <div id="pageWrapper" class="page-wrapper">
 
         <!-- –––––––––––––––[ PAGE CONTENT ]––––––––––––––– -->
-        <main id="mainContent" class="main-content">
+        <main id="mainContent" class="main-content" style="font-family: 等线">
             <div class="page-container ptb-60">
                 <div class="container">
                     <section class="sign-area panel p-40">
-                        <h3 class="sign-title">点评状态/建议</h3>
+                        <h3 class="sign-title">菜谱点评分析
+                            <small>分析评分分布</small>
+                        </h3>
                         <div class="row row-rl-0">
                             <div class="col-sm-6 col-md-7 col-left">
                                 <c:forEach items="${menu}" var="menu0">
+                                    <div>
+                                        <span>${menu0.name}
+                                        </span>
+                                    </div>
                                     <div class="progress">
-                                        <div class="progress-bar progress-bar-success" style="width: <fmt:formatNumber type="number" value="${menu0.perfectScoreNum*100}" maxFractionDigits="0"/>%">
-                                            好评 ${menu0.perfectScoreNum*100}%
+                                        <div class="progress-bar progress-bar-success"
+                                             style="width: <fmt:formatNumber type="number"
+                                                                             value="${menu0.perfectScoreNum*100}"
+                                                                             maxFractionDigits="1"/>%">
+                                            优<fmt:formatNumber type="number" value="${menu0.perfectScoreNum*100}"
+                                                               maxFractionDigits="1"/>%
                                         </div>
-                                        <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: ${menu0.goodScoreNum*100}%">
-                                                ${menu0.goodScoreNum*100}
+                                        <div class="progress-bar progress-bar-warning progress-bar-striped"
+                                             style="width: <fmt:formatNumber type="number"
+                                                                             value="${menu0.goodScoreNum*100}"
+                                                                             maxFractionDigits="1"/>%">
+                                            中<fmt:formatNumber type="number" value="${menu0.goodScoreNum*100}"
+                                                               maxFractionDigits="1"/>%
                                         </div>
-                                        <div class="progress-bar progress-bar-danger" style="width: ${menu0.badScoreNum*100}%">
-                                                ${menu0.badScoreNum*100}
+                                        <div class="progress-bar progress-bar-danger"
+                                             style="width: <fmt:formatNumber type="number"
+                                                                             value="${menu0.badScoreNum*100}"
+                                                                             maxFractionDigits="1"/>%">
+                                            差<fmt:formatNumber type="number" value="${menu0.badScoreNum*100}"
+                                                               maxFractionDigits="1"/>%
                                         </div>
                                         <div class="progress-bar progress-bar-info" style="width: 0%">
                                         </div>
                                     </div>
                                 </c:forEach>
+
+                            </div>
+                            <div class="col-sm-6 col-md-7 col-left">
+                                <div>
+
+                                    <div class="well well-large">
+                                        <h3><strong>建议</strong>
+                                        </h3>
+                                        &nbsp;&nbsp;
+                                        <strong>
+                                            <c:forEach items="${menu}" var="menu1">
+                                                <c:if test="${menu1.perfectScoreNum>0.6}">
+                                                    ${menu1.name}&nbsp;
+                                                </c:if>
+                                            </c:forEach>
+                                        </strong>
+                                        <br>
+
+                                        上述菜品表现很好，<strong style="color: green">请保留这些优秀菜品</strong>
+                                        <hr>
+                                        <strong>
+                                            <c:forEach items="${menu}" var="menu1">
+                                                <c:if test="${menu1.perfectScoreNum<0.5 &&(menu1.perfectScoreNum+menu1.goodScoreNum)>0.6}">
+                                                    ${menu1.name}&nbsp;
+                                                </c:if>
+                                            </c:forEach>
+                                        </strong>
+                                        <br>
+                                        上述菜品表现还行，<strong style="color: green">请适当地留意大家的评论做出调整</strong>
+                                        <hr>
+                                        <strong>
+                                            <c:forEach items="${menu}" var="menu1">
+                                                <c:if test="${menu1.badScoreNum>0.5 }">
+                                                    ${menu1.name}&nbsp;
+                                                </c:if>
+                                            </c:forEach>
+                                        </strong>
+                                        <br>
+                                        上述菜品表现较差，<strong style="color: green">若想保留，请积极留意大家的评论和文章做出调整</strong>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </section>
@@ -157,13 +217,6 @@
             </div>
         </main>
 
-        <footer id="mainFooter" class="main-footer">
-            <div class="container">
-                <div class="row">
-                    <p>Copyright &copy; 2016 . All rights reserved.</p>
-                </div>
-            </div>
-        </footer>
         <!-- –––––––––––––––[ END FOOTER ]––––––––––––––– -->
 
     </div>

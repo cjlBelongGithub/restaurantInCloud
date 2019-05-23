@@ -139,6 +139,9 @@
     <!-- –––––––––––––––[ PAGE CONTENT ]––––––––––––––– -->
     <main id="mainContent" class="main-content">
         <div class="page-container ptb-60">
+            <H1 style="margin:0 10%">搜索结果&nbsp;&nbsp;&nbsp;&nbsp;<small>关键字“${requestScope.searchWord}”</small>
+            </H1>
+            <hr/>
             <div class="container">
                 <section class="sign-area panel p-40">
                     <h3 class="sign-title"><strong>餐厅</strong></h3>
@@ -149,7 +152,7 @@
                         <c:forEach items="${restaurants}" var="restaurant">
                             <div class="media">
                                 <div class="media-left">
-                                    <a href="#">
+                                    <a href="<%=basePath%>restaurant/getAllMenuOfTheRestaurant.action?restaurantId=${restaurant.id}">
                                         <img class="media-object" width="64px" height="64px" src="<%=basePath%>${restaurant.logo}" alt="...">
                                     </a>
                                 </div>
@@ -247,7 +250,8 @@
                             <div class="media">
                                 <div class="media-body">
                                     <h4 class="media-heading">${post.title}</h4>
-                                    ${post.menu.name}
+                                        ${post.menu.name}/发表时间：<fmt:formatDate value="${post.time}"
+                                                                               pattern="yyyy-MM-dd:hh"></fmt:formatDate>
                                 </div>
                             </div>
                         </c:forEach>

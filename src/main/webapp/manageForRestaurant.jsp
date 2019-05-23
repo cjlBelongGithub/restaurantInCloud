@@ -101,7 +101,7 @@
     </style>
 </head>
 
-<body id="body" class="wide-layout preloader-active">
+<body id="body" class="wide-layout preloader-active" style="font-family: 等线">
 
      
 
@@ -228,7 +228,8 @@
                                         </ul>
                                         <div class="deal-about p-20 pos-a bottom-0 left-0">
                                             <h3 class="deal-title mb-10 ">
-                                                <a href="deal_single.html" class="color-light color-h-lighter">${menu.name}</a>
+                                                <a href="#" onclick="makeAComment(${menu.menuid})"
+                                                   class="color-light color-h-lighter"><strong>${menu.name}</strong></a>
                                             </h3>
                                         </div>
                                     </figure>
@@ -282,7 +283,7 @@
                         function tendence() {
                             layui.use('layer', function(){
                                 var layer = layui.layer;
-                                layer.open({
+                                var index = layer.open({
                                     type: 2,
                                     title: '添加菜谱',
                                     shadeClose: true,
@@ -291,6 +292,7 @@
                                     area: ['480px', '500px'],
                                     content: '<%=basePath%>restaurant/getAllMenuOfRestaurantForData.action'
                                 });
+                                layer.full(index);
                             });
                         }
                         function addMenu() {

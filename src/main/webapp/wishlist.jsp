@@ -97,7 +97,7 @@
     </style>
 </head>
 
-<body id="body" class="wide-layout preloader-active">
+<body id="body" class="wide-layout preloader-active" style="font-family: 等线">
 
 
 

@@ -45,6 +45,7 @@ public class SearchControl {
         request.setAttribute("restaurants",restaurants);
         request.setAttribute("posts",posts);
         request.setAttribute("menus",menus);
+        request.setAttribute("searchWord", searchWord);
 
         request.getRequestDispatcher("/searchResult.jsp").forward(request,response);
     }

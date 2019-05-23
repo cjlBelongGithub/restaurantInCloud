@@ -138,16 +138,18 @@
                             function search(searchWord) {
                                 layui.use('layer', function() {
                                     var layer = layui.layer;
-                                    layer.open({
+                                    var index = layer.open({
                                         type: 2,
                                         title: '<strong>搜索结果</strong>',
                                         shadeClose: true,
                                         shade: false,
-                                        maxmin: true, //开启最大化最小化按钮
+                                        maxmin: false, //开启最大化最小化按钮
                                         area: ['893px', '700px'],
                                         content: '<%=basePath%>search/word.action?searchWord='+searchWord
                                     });
+                                    layer.full(index);
                                 })
+
                             }
                         </script>
                         <div class="col-sm-4 t-xs-center t-md-right">
@@ -258,7 +260,7 @@
                                                 shadeClose: true,
                                                 shade: false,
                                                 maxmin: true, //开启最大化最小化按钮
-                                                area: ['600px', '600px'],
+                                                area: ['800px', '600px'],
                                                 content: '<%=basePath%>post/posting.action'
                                             });
                                         })
@@ -266,7 +268,23 @@
                                 </script>
                                 <li>
                                     <a href="#">浏览全部文章</a>
+                                    <script>
+                                        function makeAPost() {
+                                            layui.use('layer', function () {
+                                                var layer = layui.layer;
 
+                                                layer.open({
+                                                    type: 2,
+                                                    title: '文章',
+                                                    shadeClose: true,
+                                                    shade: false,
+                                                    maxmin: true, //开启最大化最小化按钮
+                                                    area: ['800px', '600px'],
+                                                    content: '<%=basePath%>post/posting.action'
+                                                });
+                                            })
+                                        }
+                                    </script>
                                 </li>
                             </ul>
                         </li><c:if test="${not empty sessionScope.user}">

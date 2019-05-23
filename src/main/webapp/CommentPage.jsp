@@ -57,7 +57,7 @@
 </head>
 <body>
 <!-- –––––––––––––––[ PAGE CONTENT ]––––––––––––––– -->
-<main id="mainContent" class="main-content">
+<main id="mainContent" class="main-content" style="font-family: 等线">
     <!-- Page Container -->
     <div class="page-container ptb-60">
         <div class="container">

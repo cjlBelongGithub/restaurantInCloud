@@ -152,24 +152,27 @@
                                         <div role="tabpanel" class="tab-pane ptb-20 active" id="deals">
                                             <section class="section deals-area">
                                                 <div class="row row-masnory row-tb-20">
-                                                    <c:forEach items="${requestScope.company.restaurants}" var="restaurant">
+                                                    <c:forEach items="${requestScope.company.restaurants}" var="post">
                                                         <div class="col-sm-12 col-lg-3">
                                                             <div class="deal-single panel">
-                                                                <figure class="deal-thumbnail embed-responsive embed-responsive-16by9" data-bg-img="<%=basePath%>${restaurant.logo}">
+                                                                <figure class="deal-thumbnail embed-responsive embed-responsive-16by9"
+                                                                        data-bg-img="<%=basePath%>${post.logo}">
                                                                     </ul>
                                                                     <div class="deal-store-logo">
-                                                                        <img src="<%=basePath%>${restaurant.logo}" alt="">
+                                                                        <img src="<%=basePath%>${post.logo}" alt="">
                                                                     </div>
                                                                 </figure>
                                                                 <div class="bg-white pt-20 pl-20 pr-15">
                                                                     <div class="pr-md-10">
                                                                         <h3 class="deal-title mb-10">
-                                                                            <a href="<%=basePath%>restaurant/getAllMenuOfTheRestaurant.action?restaurantId=${restaurant.id}">${restaurant.name}</a>
+                                                                            <a href="<%=basePath%>restaurant/getAllMenuOfTheRestaurant.action?restaurantId=${post.id}">${post.name}</a>
                                                                         </h3>
                                                                         <ul class="deal-meta list-inline mb-10 color-mid">
-                                                                            <li><i class="ico fa fa-map-marker mr-10"></i>${restaurant.position}</li>
+                                                                            <li>
+                                                                                <i class="ico fa fa-map-marker mr-10"></i>${post.position}
+                                                                            </li>
                                                                         </ul>
-                                                                        <p class="text-muted mb-20">${restaurant.shortsaying}</p>
+                                                                        <p class="text-muted mb-20">${post.shortsaying}</p>
                                                                     </div>
                                                                 </div>
                                                             </div>

@@ -122,12 +122,12 @@ public class RestaurantServiceImpl implements RestaurantService {
                 if(post.getScore()<=3)
                     badScore++;
             }
-            for(Comment post : comments){
-                if(post.getScore() == 5)
+            for (Comment comment : comments) {
+                if (comment.getScore() == 5)
                     perfectScore++;
-                if(post.getScore() < 5 && post.getScore() >= 4)
+                if (comment.getScore() < 5 && comment.getScore() >= 4)
                     goodScore++;
-                if(post.getScore()<=3)
+                if (comment.getScore() <= 3)
                     badScore++;
             }
 

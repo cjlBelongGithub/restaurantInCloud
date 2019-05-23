@@ -111,8 +111,8 @@
                                         <div  class="layui-input-block">
                                             <select class="selectpicker show-tick form-control" name="restaurantid" id="restaurant"  onchange="refreshMenu()" data-live-search="true">
                                                 <option value="-1">--请选择--</option>
-                                                <c:forEach items="${restaurants}" var="restaurant">
-                                                    <option value="${restaurant.id}" >${restaurant.name}(${restaurant.position})</option>
+                                                <c:forEach items="${restaurants}" var="post">
+                                                    <option value="${post.id}">${post.name}(${post.position})</option>
                                                 </c:forEach>
                                             </select>
                                         </div>

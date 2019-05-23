@@ -1,6 +1,7 @@
 package com.restaurant.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class Post extends PostKey {
     /**
@@ -93,6 +94,16 @@ public class Post extends PostKey {
 
     public void setMenu(Menu menu) {
         this.menu = menu;
+    }
+
+    private List<Comment> comments;
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     /**

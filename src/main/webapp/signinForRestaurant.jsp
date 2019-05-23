@@ -145,8 +145,8 @@
                             <form class="p-40" action="<%=basePath%>login/forRestaurantLoginCheck.action" method="post">
                                 <div class="form-group">
                                     <select class="selectpicker show-tick form-control" name="id" data-live-search="true">
-                                        <c:forEach items="${restaurants}" var="restaurant">
-                                            <option value="${restaurant.id}">${restaurant.name}(${restaurant.position})</option>
+                                        <c:forEach items="${restaurants}" var="post">
+                                            <option value="${post.id}">${post.name}(${post.position})</option>
                                         </c:forEach>
                                     </select>
                                 </div>

@@ -235,8 +235,9 @@
                         <li>
                             <a href="coupons_grid.html">推荐餐馆</a>
                             <ul>
-                                <c:forEach items="${recommendRestaurant}" var="restaurant" begin="0" end="4">
-                                    <li><a href="<%=basePath%>restaurant/getAllMenuOfTheRestaurant.action?restaurantId=${restaurant.id}">${restaurant.name}</a>
+                                <c:forEach items="${recommendRestaurant}" var="post" begin="0" end="4">
+                                    <li>
+                                        <a href="<%=basePath%>restaurant/getAllMenuOfTheRestaurant.action?restaurantId=${post.id}">${post.name}</a>
                                     </li>
                                 </c:forEach>
                             </ul>
@@ -267,7 +268,7 @@
                                     }
                                 </script>
                                 <li>
-                                    <a href="#">浏览全部文章</a>
+                                    <a href="#" onclick="showAllPosts()">浏览全部文章</a>
                                     <script>
                                         function makeAPost() {
                                             layui.use('layer', function () {
@@ -281,6 +282,22 @@
                                                     maxmin: true, //开启最大化最小化按钮
                                                     area: ['800px', '600px'],
                                                     content: '<%=basePath%>post/posting.action'
+                                                });
+                                            })
+                                        }
+
+                                        function showAllPosts() {
+                                            layui.use('layer', function () {
+                                                var layer = layui.layer;
+
+                                                layer.open({
+                                                    type: 2,
+                                                    title: '文章',
+                                                    shadeClose: true,
+                                                    shade: false,
+                                                    maxmin: true, //开启最大化最小化按钮
+                                                    area: ['800px', '600px'],
+                                                    content: '<%=basePath%>post/allPosts.action?pageNum=0'
                                                 });
                                             })
                                         }

@@ -149,16 +149,17 @@
                         <c:if test="${empty restaurants}">
                             <span>无相关结果</span>
                         </c:if>
-                        <c:forEach items="${restaurants}" var="restaurant">
+                        <c:forEach items="${restaurants}" var="post">
                             <div class="media">
                                 <div class="media-left">
-                                    <a href="<%=basePath%>restaurant/getAllMenuOfTheRestaurant.action?restaurantId=${restaurant.id}">
-                                        <img class="media-object" width="64px" height="64px" src="<%=basePath%>${restaurant.logo}" alt="...">
+                                    <a href="<%=basePath%>restaurant/getAllMenuOfTheRestaurant.action?restaurantId=${post.id}">
+                                        <img class="media-object" width="64px" height="64px"
+                                             src="<%=basePath%>${post.logo}" alt="...">
                                     </a>
                                 </div>
                                 <div class="media-body">
-                                    <h4 class="media-heading"><strong>${restaurant.name}</strong></h4>
-                                        ${restaurant.position}/${restaurant.windownum}号窗口[${restaurant.shortsaying}]
+                                    <h4 class="media-heading"><strong>${post.name}</strong></h4>
+                                        ${post.position}/${post.windownum}号窗口[${post.shortsaying}]
                                 </div>
                             </div>
                         </c:forEach>

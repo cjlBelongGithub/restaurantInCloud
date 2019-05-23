@@ -353,27 +353,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <a href="stores_01.html" class="btn btn-o btn-xs pos-a right-10 pos-tb-center">All Stores</a>
                         </header>
                         <div class="popular-stores-slider owl-slider" data-loop="true" data-autoplay="true" data-smart-speed="1000" data-autoplay-timeout="10000" data-margin="20" data-items="2" data-xxs-items="2" data-xs-items="2" data-sm-items="3" data-md-items="5" data-lg-items="6">
-                            <c:forEach items="${recommendRestaurant}" var="restaurant">
+                            <c:forEach items="${recommendRestaurant}" var="post">
                                 <div class="store-item t-center">
-                                <a href="<%=basePath%>restaurant/getAllMenuOfTheRestaurant.action?restaurantId=${restaurant.id}" class="panel is-block">
+                                    <a href="<%=basePath%>restaurant/getAllMenuOfTheRestaurant.action?restaurantId=${post.id}"
+                                       class="panel is-block">
                                     <div class="embed-responsive embed-responsive-4by3">
                                         <div class="store-logo">
-                                            <img src="<%=basePath%>${restaurant.logo}" alt="">
+                                            <img src="<%=basePath%>${post.logo}" alt="">
                                         </div>
                                     </div>
-                                    <h6 class="store-name ptb-10">${restaurant.name}</h6>
+                                        <h6 class="store-name ptb-10">${post.name}</h6>
                                 </a>
                             </div>
                             </c:forEach>
-                            <c:forEach items="${recommendRestaurant}" var="restaurant">
+                            <c:forEach items="${recommendRestaurant}" var="post">
                                 <div class="store-item t-center">
-                                    <a href="<%=basePath%>restaurant/getAllMenuOfTheRestaurant.action?restaurantId=${restaurant.id}" class="panel is-block">
+                                    <a href="<%=basePath%>restaurant/getAllMenuOfTheRestaurant.action?restaurantId=${post.id}"
+                                       class="panel is-block">
                                         <div class="embed-responsive embed-responsive-4by3">
                                             <div class="store-logo">
-                                                <img src="<%=basePath%>${restaurant.logo}" alt="">
+                                                <img src="<%=basePath%>${post.logo}" alt="">
                                             </div>
                                         </div>
-                                        <h6 class="store-name ptb-10">${restaurant.name}</h6>
+                                        <h6 class="store-name ptb-10">${post.name}</h6>
                                     </a>
                                 </div>
                             </c:forEach>

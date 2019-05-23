@@ -1,11 +1,9 @@
 package com.restaurant.service.Implement;
 
 import com.restaurant.entity.*;
-import com.restaurant.mapper.MenuMapper;
-import com.restaurant.mapper.NoticeMapper;
-import com.restaurant.mapper.RestaurantMapper;
-import com.restaurant.mapper.RestaurantReplyMapper;
+import com.restaurant.mapper.*;
 import com.restaurant.service.Interface.RestaurantService;
+import org.omg.CORBA.INTERNAL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +19,10 @@ public class RestaurantServiceImpl implements RestaurantService {
     private MenuMapper menuMapper;
     @Autowired
     private NoticeMapper noticeMapper;
+    @Autowired
+    private PostMapper postMapper;
+    @Autowired
+    private CommentMapper commentMapper;
 
     @Autowired
     private RestaurantReplyMapper restaurantReplyMapper;
@@ -94,7 +96,46 @@ public class RestaurantServiceImpl implements RestaurantService {
     public List<Menu> getAllMenuOf(int restaurantId){
         MenuExample menuExample= new MenuExample();
         menuExample.createCriteria().andRestaurantidEqualTo(restaurantId);
-        return menuMapper.selectByExample(menuExample);
+        List<Menu> list = menuMapper.selectByExample(menuExample);
+
+        for(Menu menu: list){
+            PostExample postExample = new PostExample();
+            postExample.createCriteria().andRestaurantidEqualTo(menu.getRestaurantid());
+            postExample.createCriteria().andMenuidEqualTo(menu.getMenuid());
+            List<Post> posts= postMapper.selectByExample(postExample);
+            CommentExample commentExample = new CommentExample();
+            commentExample.createCriteria().andTomenuidEqualTo(menu.getMenuid());
+            List<Comment> comments = commentMapper.selectByExample(commentExample);
+
+            Integer sumScoreNum = posts != null? posts.size() : 0;
+            sumScoreNum += comments != null ? comments.size() : 0;
+
+            Integer perfectScore = 0;
+            Integer goodScore = 0;
+            Integer badScore = 0;
+
+            for(Post post : posts){
+                if(post.getScore() == 5)
+                    perfectScore++;
+                if(post.getScore() < 5 && post.getScore() >= 4)
+                    goodScore++;
+                if(post.getScore()<=3)
+                    badScore++;
+            }
+            for(Comment post : comments){
+                if(post.getScore() == 5)
+                    perfectScore++;
+                if(post.getScore() < 5 && post.getScore() >= 4)
+                    goodScore++;
+                if(post.getScore()<=3)
+                    badScore++;
+            }
+
+            menu.setPerfectScoreNum((perfectScore+0.0)/sumScoreNum);
+            menu.setGoodScoreNum((goodScore+0.0)/sumScoreNum);
+            menu.setBadScoreNum((badScore+0.0)/sumScoreNum);
+        }
+        return list;
     }
 
     @Override

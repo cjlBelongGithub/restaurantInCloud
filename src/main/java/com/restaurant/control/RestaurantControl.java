@@ -63,6 +63,16 @@ public class RestaurantControl {
         return restaurantService.getAllMenuOf(restaurantId);
     }
 
+    @RequestMapping("/getAllMenuOfRestaurantForData.action")
+    public void getAllMenuOfRestaurantForData(Integer restaurantId ,HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+        if(restaurantId == null){
+            Restaurant restaurant = (Restaurant)request.getSession().getAttribute("restaurant");
+            restaurantId = restaurant.getId();
+        }
+        request.setAttribute("menu",restaurantService.getAllMenuOf(restaurantId));
+        request.getRequestDispatcher("/tendence.jsp").forward(request,response);
+    }
+
     @RequestMapping("/toManageAllMenuOfRestaurant.action")
     public void toManageAllMenuOfRestaurant(HttpServletRequest request ,HttpServletResponse response) throws ServletException, IOException {
         Restaurant restaurant = (Restaurant) request.getSession().getAttribute("restaurant");

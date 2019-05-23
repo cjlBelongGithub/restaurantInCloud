@@ -276,7 +276,7 @@
                     </div>
                     <div style="">
                         <button style="margin-bottom: 20px;font-size: 16px" onclick="addMenu()" type="button" class="col-xs-12 btn btn-default">添加菜谱</button>
-                        <button style="font-size: 16px" onclick="tendence()"  type="button" class="col-xs-12 btn btn-default">添加菜谱</button>
+                        <button style="font-size: 16px" onclick="tendence()"  type="button" class="col-xs-12 btn btn-default">趋势</button>
                     </div>
                     <script>
                         function tendence() {
@@ -289,7 +289,7 @@
                                     shade: false,
                                     maxmin: false, //开启最大化最小化按钮
                                     area: ['480px', '500px'],
-                                    content: '<%=basePath%>tendence.jsp'
+                                    content: '<%=basePath%>restaurant/getAllMenuOfRestaurantForData.action'
                                 });
                             });
                         }

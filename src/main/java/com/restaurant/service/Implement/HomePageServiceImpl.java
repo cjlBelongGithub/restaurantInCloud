@@ -74,21 +74,21 @@ public class HomePageServiceImpl implements HomePageService {
     @Override
     public List<Menu> getMenuNameLike(String keyWord) {
         MenuExample menuExample = new MenuExample();
-        menuExample.createCriteria().andNameLike(keyWord);
+        menuExample.createCriteria().andNameLike("%"+keyWord+"%");
         return menuMapper.selectByExample(menuExample);
     }
 
     @Override
     public List<Restaurant> getRestaurantNameLike(String keyWord) {
         RestaurantExample restaurantExample = new RestaurantExample();
-        restaurantExample.createCriteria().andNameLike(keyWord);
+        restaurantExample.createCriteria().andNameLike("%"+keyWord+"%");
         return restaurantMapper.selectByExample(restaurantExample);
     }
 
     @Override
     public List<Post> getPostNameLike(String keyWord) {
         PostExample postExample = new PostExample();
-        postExample.createCriteria().andTitleLike(keyWord);
+        postExample.createCriteria().andTitleLike("%"+keyWord+"%");
         return postMapper.selectByExample(postExample);
     }
 

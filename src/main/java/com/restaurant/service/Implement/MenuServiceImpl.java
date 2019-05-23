@@ -1,10 +1,7 @@
 package com.restaurant.service.Implement;
 
 import com.restaurant.entity.*;
-import com.restaurant.mapper.MenuMapper;
-import com.restaurant.mapper.PostMapper;
-import com.restaurant.mapper.RestaurantMapper;
-import com.restaurant.mapper.LikeMenuMapper;
+import com.restaurant.mapper.*;
 import com.restaurant.service.Interface.MenuService;
 import org.omg.CORBA.INTERNAL;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +20,9 @@ public class MenuServiceImpl implements MenuService {
 
     @Autowired
     private PostMapper postMapper;
+
+    @Autowired
+    private CommentMapper commentMapper;
 
     @Autowired
     private LikeMenuMapper likeMenuMapper;
@@ -56,19 +56,24 @@ public class MenuServiceImpl implements MenuService {
             menu.setRestaurant(restaurantMapper.selectByExample(restaurantExample).get(0));
 
             PostExample postExample = new PostExample();
-            postExample.createCriteria().andRestaurantidEqualTo(menu.getRestaurantid());
-            postExample.createCriteria().andMenuidEqualTo(menu.getMenuid());
+            postExample.createCriteria().andRestaurantidEqualTo(menu.getRestaurantid()).andMenuidEqualTo(menu.getMenuid());
             List<Post> posts= postMapper.selectByExample(postExample);
+
+            CommentExample commentExample = new CommentExample();
+            commentExample.createCriteria().andTomenuidEqualTo(menu.getMenuid());
+            List<Comment> comments = commentMapper.selectByExample(commentExample);
 
             menu.setPostNum(posts.size());
 
             Integer score = 0;
-
             for (Post post: posts)
                 score += post.getScore();
-            if(posts.size() != 0)
-                score /= posts.size();
+            for (Comment comment :comments)
+                score += comment.getScore();
+            if(posts.size() != 0 || comments.size() != 0)
+                score /= posts.size()+comments.size();
             menu.setScore(score);
+
 
             likeMenuExample likeMenuExample = new likeMenuExample();
             if(userId != null)

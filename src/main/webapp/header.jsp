@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-sm-12 col-md-4 is-hidden-sm-down">
                     <ul class="nav-top nav-top-left list-inline t-left">
-                        <c:if test="${empty restaurant}">
+                        <c:if test="${empty sessionScope.restaurant}">
                             <li onclick="signInForRestaurant()">
                                 <a href="#">
                                     <i class="fa fa-user">
@@ -17,7 +17,7 @@
                                 </a>
                             </li>
                         </c:if>
-                        <c:if test="${not empty restaurant}">
+                        <c:if test="${not empty sessionScope.restaurant}">
                             <li>
                                 <a href="#">
                                     <i class="fa fa-user">
@@ -121,25 +121,35 @@
                 <div class="header-search col-md-9">
                     <div class="row row-tb-10 ">
                         <div class="col-sm-8">
-                            <div class="input-group">
-                                <input type="text" class="form-control input-lg search-input" placeholder="在这输入搜索内容..." required="required">
-                                <div class="input-group-btn">
-                                    <div class="input-group">
-                                        <%--<select class="form-control input-lg search-select">
-                                            <option>选择类型</option>
-                                            <option value="餐食">餐食</option>
-                                            <option value="窗口">窗口</option>
-                                            <option value="点评">点评</option>
-                                        </select>--%>
-                                        <div class="input-group-btn">
-                                            <button type="submit" class="btn btn-lg btn-search btn-block">
-                                                <i class="fa fa-search font-16"></i>
-                                            </button>
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-lg search-input" id="searchWord" placeholder="在这输入搜索内容..." required="required">
+                                    <div class="input-group-btn">
+                                        <div class="input-group">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-lg btn-block" onclick="search($('#searchWord').val())">
+                                                    <i class="fa fa-search font-16"></i>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                         </div>
+                        <script>
+                            function search(searchWord) {
+                                layui.use('layer', function() {
+                                    var layer = layui.layer;
+                                    layer.open({
+                                        type: 2,
+                                        title: '<strong>搜索结果</strong>',
+                                        shadeClose: true,
+                                        shade: false,
+                                        maxmin: true, //开启最大化最小化按钮
+                                        area: ['893px', '700px'],
+                                        content: '<%=basePath%>search/word.action?searchWord='+searchWord
+                                    });
+                                })
+                            }
+                        </script>
                         <div class="col-sm-4 t-xs-center t-md-right">
                             <!--<div class="header-cart">
                                 <a href="cart.html">
@@ -150,13 +160,13 @@
                                 </a>
                             </div>-->
                             <div class="header-wishlist ml-20">
-                                <c:if test="${not empty user}">
+                                <c:if test="${not empty sessionScope.user}">
                                     <a href="#" onclick="myLikeMenu()">
                                         <span class="icon lnr lnr-heart font-20"></span>
                                         <span class="title" style="color: #000;line-height: 40px;margin-left: 10px;">收藏</span>
                                     </a>
                                 </c:if>
-                                <c:if test="${not empty restaurant}">
+                                <c:if test="${not empty sessionScope.restaurant}">
                                     <a href="#" onclick="manageMyRestaurant()">
                                         <i class="fa fa-user font-30">
                                         </i>
@@ -229,19 +239,6 @@
                                 </c:forEach>
                             </ul>
                         </li>
-                        <%--<li>
-                            <a href="stores_01.html">Stores</a>
-                            <ul>
-                                <li><a href="stores_01.html">Stores Search</a>
-                                </li>
-                                <li><a href="stores_02.html">Stores Categories</a>
-                                </li>
-                                <li><a href="store_single_01.html">Store Single 1</a>
-                                </li>
-                                <li><a href="store_single_02.html">Store Single 2</a>
-                                </li>
-                            </ul>
-                        </li>--%>
                         <li>
                             <a href="#">文章</a>
                             <ul>
@@ -272,17 +269,7 @@
 
                                 </li>
                             </ul>
-                        </li>
-                        <li>
-                            <a href="contact_us_01.html">联系我们</a>
-                            <ul>
-                                <li><a href="contact_us_01.html">微信：cjh1059886465</a>
-                                </li>
-                                <li><a href="contact_us_02.html">QQ：1059886465</a>
-                                </li>
-                            </ul>
-                        </li>
-
+                        </li><c:if test="${not empty sessionScope.user}">
                         <li>
                             <a href="#">个人中心</a>
                             <ul>
@@ -325,64 +312,21 @@
                                         });
                                     }
                                 </script>
-
-                                <%--<li><a href="404.html">404 页</a>
-                                </li>
-                                <li><a href="faq.html">FAQ Page</a>
-                                </li>
-                                <li><a href="cart.html">Cart Page</a>
-                                </li>
-                                <li>
-                                    <a href="checkout_method.html">Checkout</a>
-                                    <ul>
-                                        <li><a href="checkout_method.html">Checkout method</a>
-                                        </li>
-                                        <li><a href="checkout_billing.html">Billing Information</a>
-                                        </li>
-                                        <li><a href="checkout_payment.html">Payment Information</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#">Contact Us</a>
-                                    <ul>
-                                        <li><a href="contact_us_01.html">Contact Us 1</a>
-                                        </li>
-                                        <li><a href="contact_us_02.html">Contact Us 2</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#">Deals Pages</a>
-                                    <ul>
-                                        <li><a href="deals_grid.html">Grid View</a>
-                                        </li>
-                                        <li><a href="deals_list.html">List View</a>
-                                        </li>
-                                        <li><a href="deal_single.html">Deal Single</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#">Coupons Pages</a>
-                                    <ul>
-                                        <li><a href="coupons_grid.html">Grid View</a>
-                                        </li>
-                                        <li><a href="coupons_grid_sidebar.html">Grid With Sidebar</a>
-                                        </li>
-                                        <li><a href="coupons_list.html">List View</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a href="terms_conditions.html">Terms &amp; conditions</a>
-                                </li>--%>
                             </ul>
                         </li>
+                    </c:if>
+                        <li>
+                            <a href="contact_us_01.html">联系我们</a>
+                            <ul>
+                                <li><a href="contact_us_01.html">微信：cjh1059886465</a>
+                                </li>
+                                <li><a href="contact_us_02.html">QQ：1059886465</a>
+                                </li>
+                            </ul>
+                        </li>
+
                     </ul>
                 </div>
-                <%--<div class="nav-menu nav-menu-fixed">
-                    <a href="#">Get Quote</a>
-                </div>--%>
             </nav>
         </div>
     </div>

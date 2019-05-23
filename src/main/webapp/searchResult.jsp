@@ -1,6 +1,8 @@
 ﻿
 <%@ page import="javax.swing.plaf.basic.BasicEditorPaneUI" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%
@@ -139,55 +141,116 @@
         <div class="page-container ptb-60">
             <div class="container">
                 <section class="sign-area panel p-40">
-                    <h3 class="sign-title"><strong>店家</strong>登录 <small>或<a href="signup.html" class="color-green">注册</a></small></h3>
+                    <h3 class="sign-title"><strong>餐厅</strong></h3>
                     <div class="row row-rl-0">
-                        <div class="col-sm-6 col-md-7 col-left">
-                            <form class="p-40" action="<%=basePath%>login/forRestaurantLoginCheck.action" method="post">
-                                <div class="form-group">
-                                    <select class="selectpicker show-tick form-control" name="id" data-live-search="true">
-                                        <c:forEach items="${restaurants}" var="restaurant">
-                                            <option value="${restaurant.id}">${restaurant.name}(${restaurant.position})</option>
-                                        </c:forEach>
-                                    </select>
+                        <c:if test="${empty restaurants}">
+                            <span>无相关结果</span>
+                        </c:if>
+                        <c:forEach items="${restaurants}" var="restaurant">
+                            <div class="media">
+                                <div class="media-left">
+                                    <a href="#">
+                                        <img class="media-object" width="64px" height="64px" src="<%=basePath%>${restaurant.logo}" alt="...">
+                                    </a>
                                 </div>
-                                <div class="form-group">
-                                    <label class="sr-only">密码</label>
-                                    <input type="password" class="form-control input-lg" name="password" placeholder="密码">
-                                </div>
-
-                                <%--<div class="custom-checkbox mb-20">
-                                    <input type="checkbox" id="remember_account" checked>
-                                    <label class="color-mid" for="remember_account">Keep me signed in on this computer.</label>
-                                </div>--%>
-                                <button type="submit" id="loginBtn" class="btn btn-block btn-lg">登入</button>
-                            </form>
-                            <%--<span class="or">或</span>--%>
-                            <script>
-                                $("#loginBtn").click(function() {
-                                    window.parent.location.reload();
-                                })
-                            </script>
-                        </div>
-                        <%--<div class="col-sm-6 col-md-5 col-right">
-                            <div class="social-login p-40">
-                                <div class="mb-20">
-                                    <button class="btn btn-lg btn-block btn-social btn-facebook"><i class="fa fa-facebook-square"></i>Sign In with Facebook</button>
-                                </div>
-                                <div class="mb-20">
-                                    <button class="btn btn-lg btn-block btn-social btn-twitter"><i class="fa fa-twitter"></i>Sign In with Twitter</button>
-                                </div>
-                                <div class="mb-20">
-                                    <button class="btn btn-lg btn-block btn-social btn-google-plus"><i class="fa fa-google-plus"></i>Sign In with Google</button>
-                                </div>
-                                <div class="custom-checkbox mb-20">
-                                    <input type="checkbox" id="remember_social" checked>
-                                    <label class="color-mid" for="remember_social">Keep me signed in on this computer.</label>
-                                </div>
-                                <div class="text-center color-mid">
-                                    Need an Account ? <a href="signup.html" class="color-green">Create Account</a>
+                                <div class="media-body">
+                                    <h4 class="media-heading"><strong>${restaurant.name}</strong></h4>
+                                        ${restaurant.position}/${restaurant.windownum}号窗口[${restaurant.shortsaying}]
                                 </div>
                             </div>
-                        </div>--%>
+                        </c:forEach>
+                    </div>
+                </section>
+                <section class="sign-area panel p-40">
+                    <h3 class="sign-title"><strong>菜谱</strong></h3>
+                    <div class="row row-rl-0">
+                        <c:if test="${empty menus}">
+                            <span>无相关结果</span>
+                        </c:if>
+                        <c:forEach items="${menus}" var="menu">
+                            <div class="media">
+                                <div class="media-left">
+                                    <a href="#">
+                                        <img class="media-object" width="64px" height="64px" src="<%=basePath%>${menu.picture}" alt="...">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <div style="width: 80%;display: inline-block">
+                                        <h4 class="media-heading">
+                                            <a href="#" onclick="makeAComment(${menu.menuid})">
+                                                <strong>${menu.name}</strong>
+                                            </a>
+                                        </h4>
+                                        ${menu.materials}
+                                    </div>
+                                    <div style="width: 20px;display:inline-block">
+                                        <div class="btn-group" role="group" aria-label="...">
+                                            <button type="button" onclick="makeAComment(${menu.menuid})" style="background-color: white;color: black" class="btn btn-default">评论</button>
+                                            <button type="button" onclick="like(${menu.menuid})" style="background-color: white;color: black" class="btn btn-default">收藏</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </section>
+                <script type="text/javascript">
+                    function makeAComment(MenuId){
+                        layui.use('layer', function(){
+                            var layer = layui.layer;
+                            layer.open({
+                                type: 2,
+                                title: '快捷评价',
+                                shadeClose: true,
+                                shade: false,
+                                maxmin: true, //开启最大化最小化按钮
+                                area: ['600px', '600px'],
+                                content: '<%=basePath%>menu/toComment.action?menuId='+MenuId
+                            });
+                        });
+
+                    }
+                </script>
+                <script>
+                    function like(menuId) {
+                        $.ajax({
+                            url:"<%=basePath%>like/likeMenu.action?menuId="+menuId
+                            , async: true
+                            , success:function (num) {
+                                if(num)
+                                    layui.use('layer', function() {
+                                        var layer = layui.layer;
+                                        $(".menu"+menuId).removeClass('menuWhiteHeart');
+                                        $(".menu"+menuId).addClass('menuRedHeart');
+                                        layer.msg('收藏菜品成功')
+                                    })
+                                else{
+                                    layui.use('layer', function() {
+                                        var layer = layui.layer;
+                                        $(".menu"+menuId).removeClass('menuRedHeart');
+                                        $(".menu"+menuId).addClass('menuWhiteHeart');
+                                        layer.msg('取消收藏成功')
+                                    })
+                                }
+
+                            }
+                        })
+                    }
+                </script>
+                <section class="sign-area panel p-40">
+                    <h3 class="sign-title"><strong>文章</strong></h3>
+                    <div class="row row-rl-0">
+                        <c:if test="${empty posts}">
+                            <span>无相关结果</span>
+                        </c:if>
+                        <c:forEach items="${posts}" var="post">
+                            <div class="media">
+                                <div class="media-body">
+                                    <h4 class="media-heading">${post.title}</h4>
+                                    ${post.menu.name}
+                                </div>
+                            </div>
+                        </c:forEach>
                     </div>
                 </section>
             </div>

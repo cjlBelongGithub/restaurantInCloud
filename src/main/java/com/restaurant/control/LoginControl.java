@@ -38,9 +38,13 @@ public class LoginControl {
     @RequestMapping("forRestaurantLoginCheck.action")
     public boolean forRestaurantLoginCheck(Restaurant restaurant, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Boolean flag = loginAndRegisterService.loginForRestaurant(restaurant);
-        Restaurant restaurant1 = restaurantService.getRestaurant(restaurant.getId());
-        request.getSession().setAttribute("restaurant",restaurant1);
-        request.getRequestDispatcher("/homePage/first.action").forward(request,response);
+        if(flag){
+            Restaurant restaurant1 = restaurantService.getRestaurant(restaurant.getId());
+            request.getSession().setAttribute("restaurant",restaurant1);
+            request.getRequestDispatcher("/homePage/first.action").forward(request,response);
+        }else{
+            request.getRequestDispatcher("/homePage/first.action").forward(request,response);
+        }
         return flag;
     }
 

@@ -78,7 +78,7 @@
                             </H1>
                             <hr/>
                             <div style="margin: 10%">
-                            <c:if test="${empty restaurant}">
+                            <c:if test="${empty sessionScope.restaurant && not empty sessionScope.user}">
                                 <form class="layui-form" action="<%=basePath%>menu/makeAComment.action">
                                     <div class="layui-form-item layui-form-text">
                                         <label class="layui-form-label">评价：</label>

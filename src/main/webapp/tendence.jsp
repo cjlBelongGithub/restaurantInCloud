@@ -1,5 +1,6 @@
 ﻿<%@ page import="javax.swing.plaf.basic.BasicEditorPaneUI" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%
@@ -29,7 +30,7 @@
     <!-- ––––––––––––––––––––––––––––––––––––––––– -->
     <!-- PAGE TITLE                                -->
     <!-- ––––––––––––––––––––––––––––––––––––––––– -->
-    <title>FRIDAY | Coupons, Deals, Discounts and Promo codes Template</title>
+    <title>郑航食堂 | 首页，推荐，目录，优质评价</title>
 
     <!-- ––––––––––––––––––––––––––––––––––––––––– -->
     <!-- SEO METAS                                 -->
@@ -55,25 +56,38 @@
     <!-- ––––––––––––––––––––––––––––––––––––––––– -->
 
     <!-- Bootstrap -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<%=basePath%>assets/css/bootstrap.min.css" rel="stylesheet">
+    <!-- ––––––––––––––––––––––––––––––––––––––––– -->
+    <!-- Initialize jQuery library                 -->
+    <!-- ––––––––––––––––––––––––––––––––––––––––– -->
+    <script src="<%=basePath%>assets/js/jquery-1.12.3.min.js"></script>
 
     <!-- Font Awesome -->
-    <link href="assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="<%=basePath%>assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Linearicons -->
-    <link href="assets/vendors/linearicons/css/linearicons.css" rel="stylesheet">
+    <link href="<%=basePath%>assets/vendors/linearicons/css/linearicons.css" rel="stylesheet">
 
     <!-- Owl Carousel -->
-    <link href="assets/vendors/owl-carousel/owl.carousel.min.css" rel="stylesheet">
-    <link href="assets/vendors/owl-carousel/owl.theme.min.css" rel="stylesheet">
+    <link href="<%=basePath%>assets/vendors/owl-carousel/owl.carousel.min.css" rel="stylesheet">
+    <link href="<%=basePath%>assets/vendors/owl-carousel/owl.theme.min.css" rel="stylesheet">
 
     <!-- Flex Slider -->
-    <link href="assets/vendors/flexslider/flexslider.css" rel="stylesheet">
+    <link href="<%=basePath%>assets/vendors/flexslider/flexslider.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="assets/css/base.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
-
+    <link href="<%=basePath%>assets/css/base.css" rel="stylesheet">
+    <link href="<%=basePath%>assets/css/style.css" rel="stylesheet">
+    <link href="<%=basePath%>layui/css/layui.css" rel="stylesheet">
+    <script src="<%=basePath%>layui/layui.js"></script>
+    <style>
+        .menuRedHeart{
+            color: Red;
+        }
+        .menuWhiteHeart{
+            color: white;
+        }
+    </style>
 </head>
 
 <body id="body" class="wide-layout preloader-active">
@@ -121,46 +135,26 @@
                         <h3 class="sign-title">点评状态/建议</h3>
                         <div class="row row-rl-0">
                             <div class="col-sm-6 col-md-7 col-left">
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-success" style="width: 35%">
-                                        <span class="sr-only">35% Complete (success)</span>
-                                        好评 35%
+                                <c:forEach items="${menu}" var="menu0">
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-success" style="width: <fmt:formatNumber type="number" value="${menu0.perfectScoreNum*100}" maxFractionDigits="0"/>%">
+                                            好评 ${menu0.perfectScoreNum*100}%
+                                        </div>
+                                        <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: ${menu0.goodScoreNum*100}%">
+                                                ${menu0.goodScoreNum*100}
+                                        </div>
+                                        <div class="progress-bar progress-bar-danger" style="width: ${menu0.badScoreNum*100}%">
+                                                ${menu0.badScoreNum*100}
+                                        </div>
+                                        <div class="progress-bar progress-bar-info" style="width: 0%">
+                                        </div>
                                     </div>
-                                    <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: 20%">
-                                        <span class="sr-only">20% Complete (warning)</span>
-                                        20
-                                    </div>
-                                    <div class="progress-bar progress-bar-danger" style="width: 10%">
-                                        <span class="sr-only">10% Complete (danger)</span>
-                                        10
-                                    </div>
-                                </div>
+                                </c:forEach>
                             </div>
                         </div>
                     </section>
                 </div>
             </div>
-            <%--<script>
-                //***********************************上传验证**********************************
-                function checkFile(field, rules, i, options) {
-                    //上传文件验证
-                    var urlStr = field.val();
-                    if (null == urlStr || urlStr == "") {
-                        return;
-                    }
-                    if (urlStr != "") {
-                        var urlType = urlStr.substring(urlStr.lastIndexOf(".") + 1, urlStr.length);
-                        urlType = urlType.toLowerCase();
-                        if (urlType == "jpg" || urlType == "png" || urlType == "jpeg" || urlType == "gif" || urlType == "bmp") {
-                        }
-                        else {
-                            return options.allrules.validatePhoto.alertText;
-                        }
-                    }
-                }
-            </script>--%>
-
-
         </main>
 
         <footer id="mainFooter" class="main-footer">
@@ -173,14 +167,6 @@
         <!-- –––––––––––––––[ END FOOTER ]––––––––––––––– -->
 
     </div>
-    <!-- ––––––––––––––––––––––––––––––––––––––––– -->
-    <!-- END WRAPPER                               -->
-    <!-- ––––––––––––––––––––––––––––––––––––––––– -->
-
-
-    <!-- ––––––––––––––––––––––––––––––––––––––––– -->
-    <!-- BACK TO TOP                               -->
-    <!-- ––––––––––––––––––––––––––––––––––––––––– -->
     <div id="backTop" class="back-top is-hidden-sm-down">
         <i class="fa fa-angle-up" aria-hidden="true"></i>
     </div>

@@ -351,32 +351,7 @@
                                                     </c:forEach>
                                                 </div>
 
-                                                <!-- Page Pagination -->
-                                                <div class="page-pagination text-center mt-30 p-10 panel">
-                                                    <nav>
-                                                        <!-- Page Pagination -->
-                                                        <ul class="page-pagination">
-                                                            <li><a class="page-numbers previous" href="#">Previous</a>
-                                                            </li>
-                                                            <li><a href="#" class="page-numbers">1</a>
-                                                            </li>
-                                                            <li><span class="page-numbers current">2</span>
-                                                            </li>
-                                                            <li><a href="#" class="page-numbers">3</a>
-                                                            </li>
-                                                            <li><a href="#" class="page-numbers">4</a>
-                                                            </li>
-                                                            <li><span class="page-numbers dots">...</span>
-                                                            </li>
-                                                            <li><a href="#" class="page-numbers">20</a>
-                                                            </li>
-                                                            <li><a href="#" class="page-numbers next">Next</a>
-                                                            </li>
-                                                        </ul>
-                                                        <!-- End Page Pagination -->
-                                                    </nav>
-                                                </div>
-                                                <!-- End Page Pagination -->
+
                                             </section>
                                         </div>
                                         <div role="tabpanel" class="tab-pane ptb-20" id="reviews">

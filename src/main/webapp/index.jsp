@@ -309,21 +309,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     </figure>
                                     <div class="bg-white pt-20 pl-20 pr-15">
                                         <div class="pr-md-10">
-                                            <%--<div class="rating mb-10">
-                                                <span class="rating-stars rate-allow" data-rating="5">
-                                                    <i class="fa fa-star-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                </span>
-                                                <span class="rating-reviews">
-                                ( <span class="rating-count">241</span> rates )
-                                                </span>
-                                            </div>--%>
                                             <h3 class="deal-title mb-10">
-                            <a href="#" onclick="makeAComment(${menu.menuid})">${menu.name}</a>
+                                                <a href="#" onclick="makeAComment(${menu.menuid})">${menu.name}
+                                                    <small>
+                                                        <div>
+                                                            <span>辣度：</span>
+                                                            <div id="stars${menu.menuid}" style="margin-left: auto"
+                                                                 name="spicy" class="layui-input-block"></div>
+                                                        </div>
+                                                    </small>
+                                                </a>
                         </h3>
+                                            <script>
+                                                layui.use('rate', function () {
+                                                    var rate = layui.rate;
+                                                    //渲染
+                                                    rate.render({
+                                                        elem: '#stars${menu.menuid}'
+                                                        , value:${menu.spicy}
+                                                        , readonly: true
+                                                        , choose: function (value) {
+                                                            $('#score').attr("value", value);
+                                                        }
+                                                    });
+                                                });
+                                            </script>
                                             <ul class="deal-meta list-inline mb-10 color-mid">
                                                 <li><i class="ico fa fa-map-marker mr-10"></i>${menu.restaurant.position}</li>
                                                 <%--<li><i class="ico fa fa-shopping-basket mr-10"></i>120 Bought</li>--%>

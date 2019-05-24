@@ -29,6 +29,11 @@ public class RegisterControl {
         return loginAndRegisterService.isXHIdAlreadyExist(id);
     }
 
+    @RequestMapping("/checkName.action")
+    public boolean checkName(String name, HttpServletRequest request, HttpServletResponse response) {
+        return loginAndRegisterService.isNameAlreadyExist(name);
+    }
+
     @RequestMapping("/toRegister.action")
     public void toRegister(User user, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         loginAndRegisterService.register(user);

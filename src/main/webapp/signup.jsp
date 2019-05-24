@@ -137,11 +137,13 @@
                                 <form class="p-40" action="<%=basePath%>register/toRegister.action" method="post">
                                     <div class="form-group">
                                         <label class="sr-only">名字</label>
-                                        <input type="text" name="name" class="form-control input-lg" placeholder="全名" required="required">
+                                        <input type="text" name="name" class="form-control input-lg"
+                                               onblur="checkName($(this).val())" placeholder="全名" required="required">
                                     </div>
                                     <div class="form-group">
                                         <label class="sr-only">学号</label>
-                                        <input type="text" name="xhid" class="form-control input-lg" onkeyup="checkXH($(this).val())" placeholder="学号" required="required">
+                                        <input type="text" name="xhid" class="form-control input-lg"
+                                               onblur="checkXH($(this).val())" placeholder="学号" required="required">
                                     </div>
                                     <script>
                                         function checkXH(xh){
@@ -161,6 +163,35 @@
                                                             var layer = layui.layer;
                                                             layer.closeAll();
                                                             layer.msg('该学号可用！', {icon: 6});
+                                                        })
+                                                    } else if (xh.length < 9) {
+                                                        layui.use('layer', function () {
+                                                            var layer = layui.layer;
+                                                            layer.closeAll();
+                                                            layer.msg('学号长度不足', {icon: 5});
+                                                        })
+                                                    }
+                                                }
+                                            })
+                                        }
+
+                                        function checkName(name) {
+                                            $.ajax({
+                                                url: "<%=basePath%>register/checkName.action?name=" + name
+                                                , async: true
+                                                , success: function (isSuccess) {
+                                                    if (!isSuccess) {
+                                                        layui.use('layer', function () {
+                                                            var layer = layui.layer;
+                                                            layer.closeAll();
+                                                            layer.msg('该名字已存在！', {icon: 5});
+                                                            return;
+                                                        })
+                                                    } else {
+                                                        layui.use('layer', function () {
+                                                            var layer = layui.layer;
+                                                            layer.closeAll();
+                                                            layer.msg('该名字可用！', {icon: 6});
                                                         })
                                                     }
                                                 }
@@ -202,9 +233,10 @@
                                     <div class="form-group">
                                         <label class="radio-inline">
                                             <input type="radio" name="gender" id="inlineRadio1" value="男"> 男
+                                            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="女"> 女
                                         </label>
                                         <label class="radio-inline">
-                                            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="女"> 女
+
                                         </label>
                                     </div>
                                     <button type="submit" class="btn btn-block btn-lg">注册</button>

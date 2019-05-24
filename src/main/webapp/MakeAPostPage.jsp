@@ -90,22 +90,11 @@
                             <hr/>
                             <div style="margin: 10%">
 
-                                <form class="layui-form" action="<%=basePath%>post/sendAPost.action">
+                                <form id="form" class="layui-form" action="#" onsubmit="return false;">
 
 
                                     <input hidden name="userid" value="${user.uid}"/>
                                     <input hidden name="username" value="${user.name}"/>
-
-                                    <%--<!-- Single button -->
-                                    <disv class="btn-group">
-                                        <label class="layui-form-label">餐厅：</label>
-                                        <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
-                                            Popover on 顶部
-                                        </button>
-                                    </disv>
-                                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Tooltip on top</button>
-
-    --%>
                                     <div  class="layui-form-item" >
                                         <label class="layui-form-label">餐馆：</label>
                                         <div  class="layui-input-block">
@@ -208,7 +197,9 @@
 
                                     <div class="layui-form-item" style="margin-top: 30px;">
                                         <div class="layui-input-block">
-                                            <button class="layui-btn" lay-submit lay-filter="formDemo" onmousedown="refreshContent()">提交</button>
+                                            <button class="layui-btn" lay-submit lay-filter="formDemo"
+                                                    onclick="closeWin()" onmousedown="refreshContent()">提交
+                                            </button>
                                         </div>
                                     </div>
                                     <script>
@@ -234,29 +225,25 @@
                                         });
                                     </script>
                                 </form>
-                                <%--<c:forEach items="${comments}" var="comment">
-                                    <div class="col-xs-12" style="border: 1px solid #ddd;margin-top: -1px">
-                                    <div class="post-author-area panel media p-20">
-                                            <h3>${comment.username}</h3>
-                                            <h5><fmt:formatDate value="${comment.time}" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate>  <div id="starScore${comment.id}" style="margin-left: auto"  class="layui-input-block"></div></h5>
-                                            <p class="color-mid" style="word-break: break-all">${comment.content}</p>
-                                    </div>
-                                </div>
-                                    <script>
-                                        layui.use('rate', function(){
-                                            var rate = layui.rate;
-
-                                            //渲染
-
-                                            rate.render({
-                                                elem: '#starScore${comment.id}'
-                                                ,value:${comment.score}
-                                                ,readonly:true
-                                            });
+                                <script type="text/javascript">
+                                    function closeWin() {
+                                        $.ajax({
+                                            //几个参数需要注意一下
+                                            type: "POST",//方法类型
+                                            url: "<%=basePath%>post/sendAPost.action",//url
+                                            data: $('#form').serialize(),
+                                            success: function (result) {
+                                                console.log(result);//打印服务端返回的数据(调试用)
+                                                var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                                                parent.layer.msg("提交成功");
+                                                parent.layer.close(index); //再执行关闭
+                                            },
+                                            error: function () {
+                                                alert("异常！");
+                                            }
                                         });
-                                    </script>
-                                </c:forEach>--%>
-
+                                    }
+                                </script>
                             </div>
                         </div>
                     </div>

@@ -317,7 +317,7 @@
                                                 <div class="row row-masnory row-tb-20">
                                                     <c:forEach items="${posts}" var="post" varStatus="statu">
                                                         <div class="col-sm-6">
-                                                            <div class="coupon-single panel t-center">
+                                                            <div class="coupon-single panel">
                                                                 <div class="row">
                                                                     <!-- end col -->
                                                                     <div class="col-xs-12">
@@ -328,6 +328,7 @@
                                                                                             <h4 class="panel-title">
                                                                                                 <a data-toggle="collapse" data-parent="#accordion"
                                                                                                    href="#collapse${statu.index}">
+
                                                                                                     <strong title="点击展开文章内容">${post.title}</strong>
                                                                                                     <small>To ${post.menu.name}<p></p></small>
                                                                                                     <small>${post.username}</small>

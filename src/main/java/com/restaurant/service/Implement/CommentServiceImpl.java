@@ -23,4 +23,11 @@ public class CommentServiceImpl implements CommentService{
         commentExample.createCriteria().andTomenuidEqualTo(menuId);
         return commentMapper.selectByExample(commentExample);
     }
+
+    @Override
+    public List<Comment> getAllCommentSendBy(Integer uid) {
+        CommentExample commentExample = new CommentExample();
+        commentExample.createCriteria().andUseridEqualTo(uid);
+        return commentMapper.selectByExample(commentExample);
+    }
 }

@@ -13,4 +13,6 @@ public interface LoginAndRegisterService {
     boolean loginForRestaurant(Restaurant restaurant);
 
     boolean registerForRes(Restaurant restaurant);
+
+    boolean isNameAlreadyExist(String name);
 }

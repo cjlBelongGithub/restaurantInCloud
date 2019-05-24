@@ -143,11 +143,11 @@
                                         title: '<strong>搜索结果</strong>',
                                         shadeClose: true,
                                         shade: false,
-                                        maxmin: false, //开启最大化最小化按钮
+                                        maxmin: true, //开启最大化最小化按钮
                                         area: ['893px', '700px'],
                                         content: '<%=basePath%>search/word.action?searchWord='+searchWord
                                     });
-                                    layer.full(index);
+                                    /*layer.full(index);*/
                                 })
 
                             }

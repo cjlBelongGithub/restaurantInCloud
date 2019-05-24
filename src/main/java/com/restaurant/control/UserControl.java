@@ -1,8 +1,10 @@
 package com.restaurant.control;
 
+import com.restaurant.entity.Comment;
 import com.restaurant.entity.Post;
 import com.restaurant.entity.User;
 import com.restaurant.service.Implement.PostServiceImpl;
+import com.restaurant.service.Interface.CommentService;
 import com.restaurant.service.Interface.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,8 @@ public class UserControl {
     private UserService userService;
     @Autowired
     private PostServiceImpl postService;
+    @Autowired
+    private CommentService commentService;
 
     @RequestMapping("/quit.action")
     public void quitLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -70,6 +74,14 @@ public class UserControl {
         List<Post> posts = postService.allPostOfUser(user.getUid());
         request.setAttribute("posts",posts);
         request.getRequestDispatcher("myPosting.jsp").forward(request,response);
+    }
+
+    @RequestMapping("allMyComment.action")
+    public void allMyComment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        User user = (User) request.getSession().getAttribute("user");
+        List<Comment> comments = commentService.getAllCommentSendBy(user.getUid());
+        request.setAttribute("comments", comments);
+        request.getRequestDispatcher("/allMyComment.jsp").forward(request, response);
     }
 
 }

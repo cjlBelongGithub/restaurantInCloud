@@ -83,7 +83,7 @@
                             <hr/>
                             <div style="margin: 10%">
 
-                                <form class="layui-form" action="<%=basePath%>menu/alterMenu.action">
+                                <form id="form" class="layui-form" onsubmit="return false" action="#">
 
 
                                    <%-- <input hidden name="userid" value="${user.uid}"/>
@@ -105,6 +105,9 @@
                                             <input class="form-control" name="name" value="${menu.name}"/>
                                         </div>
                                     </div>
+                                    <input name="menuid" value="${menu.menuid}" hidden>
+                                    <input name="restaurantid" value="${menu.restaurantid}" hidden>
+                                    <input name="picture" value="${menu.picture}" hidden>
                                     <div class="layui-form-item" >
                                         <label class="layui-form-label">烹饪方式：</label>
                                         <div  class="layui-input-block">
@@ -121,20 +124,18 @@
                                     <div class="layui-form-item" >
                                         <label class="layui-form-label">原料：</label>
                                         <div  class="layui-input-block">
-                                            <textarea class="form-control" name="price">${menu.materials}</textarea>
+                                            <textarea class="form-control" name="materials">${menu.materials}</textarea>
                                         </div>
                                     </div>
                                     <div class="layui-form-item layui-form-text">
                                         <label class="layui-form-label">辣度：</label>
                                         <div id="stars" name="spicy"  class="layui-input-block"></div>
                                     </div>
-                                    <input type="hidden" id="score" name="spicy"/>
+                                    <input type="hidden" id="score" name="spicy" value="${menu.spicy}"/>
                                     <script>
                                         layui.use('rate', function(){
                                             var rate = layui.rate;
-
                                             //渲染
-
                                             rate.render({
                                                 elem: '#stars'
                                                 ,value:${menu.spicy}
@@ -147,7 +148,9 @@
 
                                     <div class="layui-form-item" style="margin-top: 30px;">
                                         <div class="layui-input-block">
-                                            <button class="layui-btn" lay-submit lay-filter="formDemo">提交修改</button>
+                                            <button class="layui-btn" lay-submit lay-filter="formDemo"
+                                                    onclick="closeWin()">提交修改
+                                            </button>
                                         </div>
                                     </div>
                                     <%--<script>
@@ -180,6 +183,25 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        function closeWin() {
+            $.ajax({
+                //几个参数需要注意一下
+                type: "POST",//方法类型
+                url: "<%=basePath%>menu/alterAMenu.action",//url
+                data: $('#form').serialize(),
+                success: function (result) {
+                    console.log(result);//打印服务端返回的数据(调试用)
+                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                    parent.layer.msg("提交成功");
+                    parent.layer.close(index); //再执行关闭
+                },
+                error: function () {
+                    alert("异常！");
+                }
+            });
+        }
+    </script>
     <!-- (!) Placed at the end of the document so the pages load faster -->
 
 

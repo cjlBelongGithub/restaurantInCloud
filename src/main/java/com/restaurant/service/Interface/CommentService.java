@@ -9,4 +9,5 @@ public interface CommentService {
     void addAComment(Comment comment);
     public List<Comment> getAllCommentOfMenu(Integer menuId);
 
+    List<Comment> getAllCommentSendBy(Integer uid);
 }

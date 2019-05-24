@@ -7,6 +7,7 @@ import com.restaurant.entity.UserExample;
 import com.restaurant.mapper.RestaurantMapper;
 import com.restaurant.mapper.UserMapper;
 import com.restaurant.service.Interface.LoginAndRegisterService;
+import com.restaurant.service.Interface.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -58,5 +59,12 @@ public class LoginAndRegisterServiceImpl implements LoginAndRegisterService {
             return false;
         }
 
+    }
+
+    @Override
+    public boolean isNameAlreadyExist(String name) {
+        UserExample userExample = new UserExample();
+        userExample.createCriteria().andNameEqualTo(name);
+        return userMapper.selectByExample(userExample).size() == 0;//false 为存在，true 为不存在
     }
 }

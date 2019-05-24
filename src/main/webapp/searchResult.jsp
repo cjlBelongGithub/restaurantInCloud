@@ -150,7 +150,7 @@
                             <span>无相关结果</span>
                         </c:if>
                         <c:forEach items="${restaurants}" var="post">
-                            <div class="media">
+                            <div class="media well well-large">
                                 <div class="media-left">
                                     <a href="<%=basePath%>restaurant/getAllMenuOfTheRestaurant.action?restaurantId=${post.id}">
                                         <img class="media-object" width="64px" height="64px"
@@ -172,7 +172,7 @@
                             <span>无相关结果</span>
                         </c:if>
                         <c:forEach items="${menus}" var="menu">
-                            <div class="media">
+                            <div class="media well well-large">
                                 <div class="media-left">
                                     <a href="#">
                                         <img class="media-object" width="64px" height="64px" src="<%=basePath%>${menu.picture}" alt="...">
@@ -248,11 +248,17 @@
                             <span>无相关结果</span>
                         </c:if>
                         <c:forEach items="${posts}" var="post">
-                            <div class="media">
+                            <div class="media  well well-large">
                                 <div class="media-body">
-                                    <h4 class="media-heading">${post.title}</h4>
-                                        ${post.menu.name}/发表时间：<fmt:formatDate value="${post.time}"
-                                                                               pattern="yyyy-MM-dd:hh"></fmt:formatDate>
+                                    <h3 class="media-heading">
+                                        <a href="<%=basePath%>post/showPost.action?postId=${post.id}"><strong>${post.title}</strong>
+                                            <small>
+                                                /${post.username}/<fmt:formatDate value="${post.time}"
+                                                                                  pattern="yy-MM-dd hh:mm:ss"></fmt:formatDate>
+                                            </small>
+                                        </a>
+                                    </h3>
+                                    <p style="width:100%;  overflow-y: hidden">${post.content}</p>
                                 </div>
                             </div>
                         </c:forEach>

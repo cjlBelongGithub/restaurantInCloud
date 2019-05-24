@@ -250,16 +250,12 @@
                     </c:if>
                     <c:forEach items="${post.comments}" var="comment">
                         <div class="media">
-                                <%--<div class="media-left">
-                                    <a href="#">
-                                        <div class="media-object" width="64px" height="64px" >${comment.username}</div>
-                                    </a>
-                                </div>--%>
                             <div class="media-body">
                                 <div style="width: 80%;display: inline-block">
                                     <h3 class="media-heading"><strong>${comment.content}</strong></h3>
-                                        ${comment.username}/发表时间：<fmt:formatDate value="${comment.time}"
-                                                                                 pattern="yy年MM月dd日 hh点mm分ss秒"></fmt:formatDate>
+                                        ${comment.username}/发表时间：
+                                    <fmt:formatDate value="${comment.time}"
+                                                    pattern="yy年MM月dd日 hh点mm分ss秒"></fmt:formatDate>
                                 </div>
                                 <div style="width: 20px;display:inline-block">
                                     <div class="btn-group" role="group" aria-label="...">
@@ -294,32 +290,6 @@
     </div>
 
 </main>
-<!-- –––––––––––––––[ END PAGE CONTENT ]––––––––––––––– -->
-<%--<section class="footer-top-area pt-70 pb-30 pos-r bg-blue">
-    <div class="container">
-        <div class="row row-tb-20">
-            <div class="col-sm-12">
-                <div class="row row-tb-20">
-                    <div class="footer-col">
-                        <div class="footer-about" style="text-align: center;width:100%">
-                            <img class="mb-40" src="<%=basePath%>assets/images/logo_light.png" width="250" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-12">
-                <div class="payment-methods t-center">
-                    <span><img src="assets/images/icons/payment/paypal.jpg" alt=""></span>
-                    <span><img src="assets/images/icons/payment/visa.jpg" alt=""></span>
-                    <span><img src="assets/images/icons/payment/mastercard.jpg" alt=""></span>
-                    <span><img src="assets/images/icons/payment/discover.jpg" alt=""></span>
-                    <span><img src="assets/images/icons/payment/american.jpg" alt=""></span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>--%>
-<!-- –––––––––––––––[ FOOTER ]––––––––––––––– -->
 <footer id="mainFooter" class="main-footer">
     <div class="container">
         <div class="row">

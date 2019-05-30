@@ -126,7 +126,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div id="pageWrapper" class="page-wrapper">
         <!-- –––––––––––––––[ HEADER ]––––––––––––––– -->
         <%@include file="header.jsp"%>
-        <
         <!-- –––––––––––––––[ HEADER ]––––––––––––––– -->
 
         <!-- –––––––––––––––[ PAGE CONTENT ]––––––––––––––– -->

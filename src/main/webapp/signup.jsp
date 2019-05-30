@@ -233,10 +233,10 @@
                                     <div class="form-group">
                                         <label class="radio-inline">
                                             <input type="radio" name="gender" id="inlineRadio1" value="男"> 男
-                                            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="女"> 女
+
                                         </label>
                                         <label class="radio-inline">
-
+                                            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="女"> 女
                                         </label>
                                     </div>
                                     <button type="submit" class="btn btn-block btn-lg">注册</button>
